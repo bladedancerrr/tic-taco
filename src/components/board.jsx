@@ -74,11 +74,6 @@ class Board extends Component {
         id={squareId}
         onClick={() => this.handleClick(squareId)}
         playerTurn={this.state.clickState[squareId]}
-        style={{
-          borderStyle: "solid",
-          borderWidth: 50,
-          borderColor: "black",
-        }}
       />
     );
   };
