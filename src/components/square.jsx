@@ -24,40 +24,27 @@ const Square = (props) => {
     bgdColor = "#9CD7FE";
   }
 
-  console.log(bgdColor);
-  if (playerTurn != null) {
-    return (
-      <button
-        className="square"
-        onClick={() => onClick(id)}
-        style={{
-          backgroundColor: bgdColor,
-          borderColor: "black",
-          width: 130,
-          height: 130,
-          verticalAlign: "top",
-        }}
-      >
-        <img src={imgSrc} style={{ width: 100, height: 67 }}></img>
-      </button>
-    );
-  }
+  const squareStyle = {
+    backgroundColor: bgdColor,
+    borderColor: "black",
+    width: 130,
+    height: 130,
+    verticalAlign: "top",
+  };
 
   return (
-    <button
-      className="square"
-      onClick={() => onClick(id)}
-      style={{
-        backgroundColor: bgdColor,
-        borderColor: "black",
-        width: 130,
-        height: 130,
-        verticalAlign: "top",
-      }}
-    >
-      <img></img>
+    <button className="square" onClick={() => onClick(id)} style={squareStyle}>
+      {generateImage(imgSrc, playerTurn)}
     </button>
   );
 };
 
 export default Square;
+
+function generateImage(imgSrc, playerTurn) {
+  return playerTurn == null ? (
+    <img></img>
+  ) : (
+    <img src={imgSrc} style={{ width: 100, height: 67 }}></img>
+  );
+}
