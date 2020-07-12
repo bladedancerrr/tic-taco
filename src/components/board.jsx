@@ -9,6 +9,7 @@ class Board extends Component {
     size: 3,
     playerTurn: 1,
     squares: _.chunk(_.range(3 * 3), 3),
+    clickState: new Array(3 * 3).fill(false),
   };
 
   render() {
@@ -19,6 +20,13 @@ class Board extends Component {
         {this.state.squares.map((row) => this.createRow(row))}
       </div>
     );
+  }
+
+  handleClick(squareId) {
+    console.log(`square {squareId} is clicked`);
+    const clickState = [...this.state.clickState];
+    if (!clickState[squareId]) clickState[squareId] = true;
+    this.setState({ clickState: clickState });
   }
 
   createRow = (row) => {
@@ -40,14 +48,14 @@ class Board extends Component {
   createSquare = (squareId) => {
     return (
       <div className="col m-4 my-square" key={squareId}>
-        <Square id={squareId} />
+        <Square
+          id={squareId}
+          onClick={() => this.handleClick(squareId)}
+          isClicked={this.state.clickState[squareId]}
+        />
       </div>
     );
   };
-
-  handleClick(squareId) {
-    console.log(`square {squareId} is clicked`);
-  }
 }
 
 export default Board;
