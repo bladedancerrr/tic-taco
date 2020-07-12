@@ -15,7 +15,7 @@ const Square = (props) => {
 
   if (playerTurn == null) {
     imgSrc = "";
-    bgdColor = "white";
+    bgdColor = "#EFF0F0";
   } else if (playerTurn) {
     imgSrc = cuteTaco;
     bgdColor = "pink";
@@ -48,7 +48,7 @@ const Square = (props) => {
       className="square"
       onClick={() => onClick(id)}
       style={{
-        backgroundColor: "white",
+        backgroundColor: bgdColor,
         borderColor: "black",
         width: 130,
         height: 130,

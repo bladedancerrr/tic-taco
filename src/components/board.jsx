@@ -60,7 +60,11 @@ class Board extends Component {
             {this.renderSquare(8)}
           </div>
         </div>
-        <button onClick={this.onReset} className="btn btn-primary btn-sm m-2">
+        <button
+          onClick={this.onReset}
+          className="btn btn-primary btn-sm"
+          style={{ width: 100, height: 40, textAlign: "center", marginTop: 30 }}
+        >
           Start over!
         </button>
       </div>
