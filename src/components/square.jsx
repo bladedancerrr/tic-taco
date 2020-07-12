@@ -23,7 +23,7 @@ const Square = (props) => {
     <button
       className="square"
       onClick={() => onClick(id)}
-      style={{ width: 120, height: 120 }}
+      style={{ backgroundColor: "pink", width: 120, height: 120 }}
     >
       <img src={imgSrc} style={{ width: 100, height: 67 }}></img>
     </button>
