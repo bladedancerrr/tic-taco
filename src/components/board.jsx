@@ -13,6 +13,31 @@ class Board extends Component {
     clickState: new Array(3 * 3).fill(null),
   };
 
+  constructor(props) {
+    super(props);
+
+    this.onReset = this.onReset.bind(this);
+  }
+
+  handleClick(squareId) {
+    /* If the button is clicked, it's value is set to playerTurn, signifying 
+    which player played it. */
+    console.log(`square {squareId} is clicked`);
+    const clickState = [...this.state.clickState];
+    const playerTurn = this.state.playerTurn;
+    /* If the button has not been clicked before, then change clickState. */
+    if (clickState[squareId] == null) {
+      clickState[squareId] = playerTurn;
+      this.setState({ clickState: clickState, playerTurn: !playerTurn });
+    }
+  }
+
+  onReset() {
+    const clickState = new Array(3 * 3).fill(null);
+    console.log(clickState);
+    this.setState({ clickState: clickState, playerTurn: false });
+  }
+
   render() {
     console.log(this.state.squares);
     return (
@@ -35,21 +60,11 @@ class Board extends Component {
             {this.renderSquare(8)}
           </div>
         </div>
+        <button onClick={this.onReset} className="btn btn-primary btn-sm m-2">
+          Start over!
+        </button>
       </div>
     );
-  }
-
-  handleClick(squareId) {
-    /* If the button is clicked, it's value is set to playerTurn, signifying 
-    which player played it. */
-    console.log(`square {squareId} is clicked`);
-    const clickState = [...this.state.clickState];
-    const playerTurn = this.state.playerTurn;
-    /* If the button has not been clicked before, then change clickState. */
-    if (clickState[squareId] == null) {
-      clickState[squareId] = playerTurn;
-      this.setState({ clickState: clickState, playerTurn: !playerTurn });
-    }
   }
 
   /* Renders the square in grid. */
