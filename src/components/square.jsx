@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import cuteTaco from "../img/cute_taco.png";
 import cuteBurrito from "../img/cute_burrito.png";
+import { findRenderedComponentWithType } from "react-dom/test-utils";
 
 /* Component that represents each individual square on the board. */
 const Square = (props) => {
@@ -10,21 +11,27 @@ const Square = (props) => {
   /* Setting image source depening on whether player 1 or 2 is playing, or if 
   button has not been clicked before. */
   let imgSrc;
+  let bgdColor;
 
   if (playerTurn == null) {
     imgSrc = "";
+    bgdColor = "white";
   } else if (playerTurn) {
     imgSrc = cuteTaco;
+    bgdColor = "pink";
   } else {
     imgSrc = cuteBurrito;
+    bgdColor = "#9CD7FE";
   }
+
+  console.log(bgdColor);
   if (playerTurn != null) {
     return (
       <button
         className="square"
         onClick={() => onClick(id)}
         style={{
-          backgroundColor: "pink",
+          backgroundColor: bgdColor,
           borderColor: "black",
           width: 130,
           height: 130,
@@ -41,7 +48,7 @@ const Square = (props) => {
       className="square"
       onClick={() => onClick(id)}
       style={{
-        backgroundColor: "pink",
+        backgroundColor: "white",
         borderColor: "black",
         width: 130,
         height: 130,
