@@ -6,17 +6,16 @@ import { findRenderedComponentWithType } from "react-dom/test-utils";
 /* Component that represents each individual square on the board. */
 const Square = (props) => {
   const { id, onClick, playerTurn } = props;
-  console.log(id, onClick);
 
   /* Setting image source depening on whether player 1 or 2 is playing, or if 
   button has not been clicked before. */
   let imgSrc;
   let bgdColor;
 
-  if (playerTurn == null) {
+  if (playerTurn === 0) {
     imgSrc = "";
     bgdColor = "#EFF0F0";
-  } else if (playerTurn) {
+  } else if (playerTurn === 1) {
     imgSrc = cuteTaco;
     bgdColor = "pink";
   } else {
@@ -42,7 +41,7 @@ const Square = (props) => {
 export default Square;
 
 function generateImage(imgSrc, playerTurn) {
-  return playerTurn == null ? (
+  return playerTurn === 0 ? (
     <img></img>
   ) : (
     <img src={imgSrc} style={{ width: 100, height: 67 }}></img>

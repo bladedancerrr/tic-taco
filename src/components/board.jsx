@@ -6,11 +6,11 @@ import _ from "lodash";
 
 class Board extends Component {
   state = {
-    /* Which player is playing. false is player 1, true is player 2. */
-    playerTurn: false,
+    /* Which player is playing. 1 is player 1, 2 is player 2. */
+    playerTurn: 1,
     squares: _.range(3 * 3),
     /* Which player occupies which part of the board. */
-    clickState: new Array(3 * 3).fill(null),
+    clickState: new Array(3 * 3).fill(0),
   };
 
   constructor(props) {
@@ -22,24 +22,26 @@ class Board extends Component {
   handleClick(squareId) {
     /* If the button is clicked, it's value is set to playerTurn, signifying 
     which player played it. */
-    console.log(`square {squareId} is clicked`);
     const clickState = [...this.state.clickState];
     const playerTurn = this.state.playerTurn;
     /* If the button has not been clicked before, then change clickState. */
-    if (clickState[squareId] == null) {
+    if (clickState[squareId] === 0) {
       clickState[squareId] = playerTurn;
-      this.setState({ clickState: clickState, playerTurn: !playerTurn });
+      this.setState({
+        clickState: clickState,
+        playerTurn: playerTurn === 1 ? 2 : 1,
+      });
+      /* Once a burrito has been placed, check if there is a winner */
+      // this.getWinner(squareId);
     }
   }
 
   onReset() {
-    const clickState = new Array(3 * 3).fill(null);
-    console.log(clickState);
-    this.setState({ clickState: clickState, playerTurn: false });
+    const clickState = new Array(3 * 3).fill(0);
+    this.setState({ clickState: clickState, playerTurn: 1 });
   }
 
   render() {
-    console.log(this.state.squares);
     return (
       /* Rendering 3x3 grid. */
       <div className="container">
