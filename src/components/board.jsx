@@ -23,12 +23,16 @@ class Board extends Component {
 
   createRow = (row) => {
     return (
-      <div className="row" key={row}>
-        {row.map((squareId) => this.createSquare(squareId))        style={{
+      <div
+        className="row"
+        key={row}
+        style={{
           borderStyle: "solid",
-          borderWidth: 10,
+          borderWidth: 5,
           borderColor: "black",
         }}
+      >
+        {row.map((squareId) => this.createSquare(squareId))}
       </div>
     );
   };
@@ -36,7 +40,7 @@ class Board extends Component {
   createSquare = (squareId) => {
     return (
       <div className="col m-4 my-square" key={squareId}>
-        <Square onClick={this.handleClick} id={squareId} />
+        <Square id={squareId} />
       </div>
     );
   };
