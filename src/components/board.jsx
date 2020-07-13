@@ -64,15 +64,21 @@ class Board extends Component {
             {this.renderSquare(8)}
           </div>
         </div>
+
         <button
           onClick={this.onReset}
-          className="btn btn-primary btn-sm"
+          // className="btn btn-primary btn-sm"
           style={{
-            width: 100,
-            height: 40,
+            width: 135,
+            height: 45,
             textAlign: "center",
             marginTop: 30,
-            borderRadius: 35,
+            borderRadius: 30,
+            outline: "none",
+            border: "none",
+            backgroundColor: "#90EE90",
+            borderColor: "#90EE90",
+            fontFamily: "Avantgarde",
           }}
         >
           Start over!

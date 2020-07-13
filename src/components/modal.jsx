@@ -7,7 +7,7 @@ class EndgamePopup extends Component {
   render() {
     console.log("inside modal", this.props.show);
     return (
-      <Modal show={this.props.show}>
+      <Modal show={false}>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             Modal heading

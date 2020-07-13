@@ -1,6 +1,7 @@
 import React from "react";
 import cuteTaco from "../img/cute_taco.png";
 import cuteBurrito from "../img/cute_burrito.png";
+import "./square.css";
 
 /* Component that represents each individual square on the board. */
 const Square = (props) => {
@@ -33,7 +34,11 @@ const Square = (props) => {
   };
 
   return (
-    <button className="square" onClick={() => onClick(id)} style={squareStyle}>
+    <button
+      className="squareElement"
+      onClick={() => onClick(id)}
+      style={squareStyle}
+    >
       {renderImage(imgSrc, playerTurn)}
     </button>
   );
@@ -47,7 +52,7 @@ function renderImage(imgSrc, playerTurn) {
   ) : (
     <img
       src={imgSrc}
-      alt="This a cute Mexican food :3"
+      alt="This a cute Mexican snack :3"
       style={{ width: 100, height: 67 }}
     ></img>
   );
