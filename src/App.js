@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="container">
       <nav>
-        <h3 className = "header">
+        <h3 className="header">
           Welcome to tic taco! <br></br> It's tic tac toe, but kawaii UwU
         </h3>
       </nav>
