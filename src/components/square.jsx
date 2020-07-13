@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import cuteTaco from "../img/cute_taco.png";
 import cuteBurrito from "../img/cute_burrito.png";
-import { findRenderedComponentWithType } from "react-dom/test-utils";
 
 /* Component that represents each individual square on the board. */
 const Square = (props) => {
@@ -26,8 +25,10 @@ const Square = (props) => {
   const squareStyle = {
     backgroundColor: bgdColor,
     borderColor: "black",
-    width: 130,
+    borderWidth: "thin",
     height: 130,
+    outline: "none",
+    width: 130,
     verticalAlign: "top",
   };
 
@@ -42,8 +43,12 @@ export default Square;
 
 function renderImage(imgSrc, playerTurn) {
   return playerTurn === 0 ? (
-    <img></img>
+    <img alt=""></img>
   ) : (
-    <img src={imgSrc} style={{ width: 100, height: 67 }}></img>
+    <img
+      src={imgSrc}
+      alt="This a cute Mexican food :3"
+      style={{ width: 100, height: 67 }}
+    ></img>
   );
 }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Square from "./square";
-
+import EndgamePopup from "./modal";
 /* Component that represents the tic-tac-toe board made up of squares. */
 
 class Board extends Component {
@@ -9,6 +9,7 @@ class Board extends Component {
     playerTurn: 1,
     /* Which player occupies which part of the board. */
     clickState: new Array(3 * 3).fill(0),
+    winner: 0,
   };
 
   constructor(props) {
@@ -32,7 +33,7 @@ class Board extends Component {
         },
         /* Since setState is async, perform winCheck callback after state update */
         /* Once a burrito has been placed, check if there is a winner */
-        () => this.getWinner(squareId)
+        () => this.gameShouldEnd(squareId)
       );
     }
   }
@@ -66,10 +67,17 @@ class Board extends Component {
         <button
           onClick={this.onReset}
           className="btn btn-primary btn-sm"
-          style={{ width: 100, height: 40, textAlign: "center", marginTop: 30 }}
+          style={{
+            width: 100,
+            height: 40,
+            textAlign: "center",
+            marginTop: 30,
+            borderRadius: 35,
+          }}
         >
           Start over!
         </button>
+        {this.renderModal()}
       </div>
     );
   }
@@ -85,6 +93,13 @@ class Board extends Component {
     );
   };
 
+  gameShouldEnd(squareId) {
+    const winner = this.getWinner(squareId);
+    if (winner !== 0) {
+      this.setState({ winner: winner });
+    }
+  }
+
   getWinner = (squareId) => {
     const winner = this.checkForWinner(squareId);
     if (winner !== 0) {
@@ -92,6 +107,7 @@ class Board extends Component {
         `This winnnerrr is ${winner === 1 ? "player 1" : "player 2"}`
       );
     }
+    return winner;
   };
 
   checkForWinner = (squareId) => {
@@ -141,11 +157,26 @@ class Board extends Component {
   checkDiag(diag, player) {
     for (let i = 0; i < diag.length; i++) {
       let square = diag[i];
-      console.log(square);
       if (this.state.clickState[square] !== player) return false;
     }
     return true;
   }
+
+  renderModal = () => {
+    const shouldShow = this.state.winner === 0 ? false : true;
+    console.log(shouldShow);
+    return <EndgamePopup show={shouldShow} />;
+  };
 }
 
 export default Board;
+
+// function LaunchModal(shouldShow) {
+//   const [modalShow, setModalShow] = React.useState(shouldShow);
+//   return (
+//     <MyVerticallyCenteredModal
+//       show={modalShow}
+//       onHide={() => setModalShow(false)}
+//     />
+//   );
+// }
