@@ -171,7 +171,7 @@ class Board extends Component {
   renderModal = () => {
     const shouldShow = this.state.winner === 0 ? false : true;
     console.log(shouldShow);
-    return <EndgamePopup show={shouldShow} />;
+    return <EndgamePopup show={shouldShow} winner={this.state.winner} />;
   };
 }
 
