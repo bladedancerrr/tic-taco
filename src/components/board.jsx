@@ -18,29 +18,9 @@ class Board extends Component {
     this.onReset = this.onReset.bind(this);
   }
 
-  handleClick(squareId) {
-    /* If the button is clicked, it's value is set to playerTurn, signifying 
-    which player played it. */
-    const clickState = [...this.state.clickState];
-    const playerTurn = this.state.playerTurn;
-    /* If the button has not been clicked before, then change clickState. */
-    if (clickState[squareId] === 0) {
-      clickState[squareId] = playerTurn;
-      this.setState(
-        {
-          clickState: clickState,
-          playerTurn: playerTurn === 1 ? 2 : 1,
-        },
-        /* Since setState is async, perform winCheck callback after state update */
-        /* Once a burrito has been placed, check if there is a winner */
-        () => this.gameShouldEnd(squareId)
-      );
-    }
-  }
-
   onReset() {
     const clickState = new Array(3 * 3).fill(0);
-    this.setState({ clickState: clickState, playerTurn: 1 });
+    this.setState({ clickState: clickState, playerTurn: 1, winner: 0 });
   }
 
   render() {
@@ -170,8 +150,38 @@ class Board extends Component {
 
   renderModal = () => {
     const shouldShow = this.state.winner === 0 ? false : true;
-    return <EndgamePopup show={shouldShow} winner={this.state.winner} />;
+    return (
+      <EndgamePopup
+        show={shouldShow}
+        winner={this.state.winner}
+        onHide={this.handleHide}
+      />
+    );
   };
+
+  handleHide = () => {
+    this.onReset();
+  };
+
+  handleClick(squareId) {
+    /* If the button is clicked, it's value is set to playerTurn, signifying 
+    which player played it. */
+    const clickState = [...this.state.clickState];
+    const playerTurn = this.state.playerTurn;
+    /* If the button has not been clicked before, then change clickState. */
+    if (clickState[squareId] === 0) {
+      clickState[squareId] = playerTurn;
+      this.setState(
+        {
+          clickState: clickState,
+          playerTurn: playerTurn === 1 ? 2 : 1,
+        },
+        /* Since setState is async, perform winCheck callback after state update */
+        /* Once a burrito has been placed, check if there is a winner */
+        () => this.gameShouldEnd(squareId)
+      );
+    }
+  }
 }
 
 export default Board;
