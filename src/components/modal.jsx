@@ -3,10 +3,12 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
 class EndgamePopup extends Component {
-  state = {};
+  state = { shouldShow: true };
   render() {
+    console.log(this.state.shouldShow);
     return (
-      <Modal show={this.props.show}>
+      <Modal show={this.state.shouldShow && this.props.show}>
+        {/* //   <Modal show={true}> */}
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             Game Over
@@ -16,7 +18,9 @@ class EndgamePopup extends Component {
           <h4>{`Player ${this.props.winner} won!`}</h4>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.onHide}>Play again!</Button>
+          <Button onClick={() => this.setState({ shouldShow: false })}>
+            Play again!
+          </Button>
         </Modal.Footer>
       </Modal>
     );
