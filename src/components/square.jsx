@@ -33,14 +33,14 @@ const Square = (props) => {
 
   return (
     <button className="square" onClick={() => onClick(id)} style={squareStyle}>
-      {generateImage(imgSrc, playerTurn)}
+      {renderImage(imgSrc, playerTurn)}
     </button>
   );
 };
 
 export default Square;
 
-function generateImage(imgSrc, playerTurn) {
+function renderImage(imgSrc, playerTurn) {
   return playerTurn === 0 ? (
     <img></img>
   ) : (
