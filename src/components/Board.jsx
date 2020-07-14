@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Square from "./Square";
-import EndgamePopup from "./EndgamePopup";
+import EndgamePopup, { renderModal } from "./EndgamePopup";
 import { getWinner } from "./WinCheck";
 /* Component that represents the tic-tac-toe board made up of squares. */
 
@@ -64,7 +64,7 @@ class Board extends Component {
         >
           Start over!
         </button>
-        {this.renderModal()}
+        {this.renderModal(this.state.winner, this.state.turn)}
       </div>
     );
   }
@@ -76,24 +76,6 @@ class Board extends Component {
         id={squareId}
         onClick={() => this.handleClick(squareId)}
         playerTurn={this.state.clickState[squareId]}
-      />
-    );
-  };
-
-  renderModal = () => {
-    const won = this.state.winner === 0 ? false : true;
-    const drew = this.state.turn === 9 ? true : false;
-
-    let message = "";
-    if (won) message = `Player ${this.state.winner} won!`;
-    else if (drew) message = `It's a draw!`;
-
-    return (
-      <EndgamePopup
-        show={won || drew}
-        winner={this.state.winner}
-        onHide={this.onReset}
-        message={message}
       />
     );
   };
