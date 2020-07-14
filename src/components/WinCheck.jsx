@@ -1,3 +1,5 @@
+/* Fuctionality to check if a player has won the game. */
+
 export function getWinner(clickState, squareId) {
   return checkForWinner(clickState, squareId);
 }

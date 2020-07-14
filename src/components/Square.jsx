@@ -46,9 +46,9 @@ const Square = (props) => {
 export default Square;
 
 function renderImage(imgSrc, playerTurn) {
-  return playerTurn === 0 ? (
-    <img alt=""></img>
-  ) : (
+  /* If square has not been clicked, render nothing. Else render
+  image of player icon. */
+  return playerTurn === 0 ? null : (
     <img
       src={imgSrc}
       alt="This a cute Mexican snack :3"

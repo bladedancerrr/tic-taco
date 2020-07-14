@@ -11,9 +11,11 @@ class Board extends Component {
     /* Which player occupies which part of the board. */
     clickState: new Array(3 * 3).fill(0),
     winner: 0,
+    /* Current turn number of game from 0 - 9. */
     turn: 0,
   };
 
+  /* Resetting grid to be empty. */
   onReset = () => {
     const clickState = new Array(3 * 3).fill(0);
     this.setState({
@@ -81,19 +83,22 @@ class Board extends Component {
   };
 
   renderModal = () => {
-    const won = this.state.winner === 0 ? false : true;
-    const drew = this.state.turn === 9 ? true : false;
+    /*Rendering modal when game is a draw or one of the players won.*/
+    const won = this.state.winner !== 0;
+    const draw = this.state.turn === 9;
 
-    let message = "";
-    if (won) message = `Player ${this.state.winner} won!`;
-    else if (drew) message = `It's a draw!`;
+    // let message = "";
+    // if (won) message = `Player ${this.state.winner} won!`;
+    // else if (draw) message = `It's a draw!`;
 
     return (
       <EndgamePopup
-        show={won || drew}
+        // show={won || draw}
+        won={won}
+        draw={draw}
         winner={this.state.winner}
         onHide={this.onReset}
-        message={message}
+        // message={message}
       />
     );
   };
@@ -103,7 +108,9 @@ class Board extends Component {
     which player played it. */
     const clickState = [...this.state.clickState];
     const playerTurn = this.state.playerTurn;
-    /* If the button has not been clicked before, then change clickState. */
+
+    /* If the button has not been clicked before, then change clickState and update 
+    playerTurn and turn. */
     const notClickedBefore = clickState[squareId] === 0;
     if (notClickedBefore) {
       clickState[squareId] = playerTurn;
