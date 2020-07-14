@@ -50,7 +50,6 @@ class Board extends Component {
 
         <button
           onClick={this.onReset}
-          // className="btn btn-primary btn-sm"
           style={{
             width: 135,
             height: 45,
@@ -66,7 +65,7 @@ class Board extends Component {
         >
           Start over!
         </button>
-        {this.renderModal(this.state.winner, this.state.turn)}
+        {renderModal(this.state.winner, this.state.turn, this.onReset)}
       </div>
     );
   }

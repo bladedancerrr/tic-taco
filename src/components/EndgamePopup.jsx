@@ -32,21 +32,12 @@ function EndgamePopup(props) {
   );
 }
 
-export function renderModal(winner, turn) {
-  const won = winner === 0 ? false : true;
-  const drew = turn === 9 ? true : false;
-
-  let message = "";
-  if (won) message = `Player ${this.state.winner} won!`;
-  else if (drew) message = `It's a draw!`;
+export function renderModal(winner, turn, onReset) {
+  const won = winner !== 0;
+  const draw = turn === 9 && !winner;
 
   return (
-    <EndgamePopup
-      show={won || drew}
-      winner={this.state.winner}
-      onHide={this.onReset}
-      message={message}
-    />
+    <EndgamePopup won={won} draw={draw} winner={winner} onHide={onReset} />
   );
 }
 
