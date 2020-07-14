@@ -32,6 +32,24 @@ function EndgamePopup(props) {
   );
 }
 
+export function renderModal(winner, turn) {
+  const won = winner === 0 ? false : true;
+  const drew = turn === 9 ? true : false;
+
+  let message = "";
+  if (won) message = `Player ${this.state.winner} won!`;
+  else if (drew) message = `It's a draw!`;
+
+  return (
+    <EndgamePopup
+      show={won || drew}
+      winner={this.state.winner}
+      onHide={this.onReset}
+      message={message}
+    />
+  );
+}
+
 export default EndgamePopup;
 
 /* Rendering icon of winning player in modal. */
