@@ -43,7 +43,7 @@ function renderImage(winner, draw) {
       <img
         src={imgSrc}
         alt="This a cute Mexican snack :3"
-        style={{ width: 100, height: 67 }}
+        style={{ width: 200, height: 140, marginBottom: 20, marginTop: 40 }}
       ></img>
     );
   } else {
