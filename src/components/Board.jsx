@@ -85,7 +85,9 @@ class Board extends Component {
   renderModal = () => {
     /*Rendering modal when game is a draw or one of the players won.*/
     const won = this.state.winner !== 0;
-    const draw = this.state.turn === 9;
+    /* A draw happens when the player is on the last turn with no player
+    winning the last turn. */
+    const draw = this.state.turn === 9 && !won;
 
     // let message = "";
     // if (won) message = `Player ${this.state.winner} won!`;
