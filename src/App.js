@@ -1,14 +1,14 @@
 import React from "react";
 import "./App.css";
-import Board from "./components/board";
+import Board from "./components/Board";
 
 function App() {
   return (
     <div className="container">
       <nav>
-        <h3 className="header">
+        <div className="header">
           Welcome to tic taco! <br></br> It's tic tac toe, but kawaii UwU
-        </h3>
+        </div>
       </nav>
       <main>
         <Board />

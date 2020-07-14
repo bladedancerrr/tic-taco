@@ -1,7 +1,6 @@
 import React from "react";
 import cuteTaco from "../img/cute_taco.png";
 import cuteBurrito from "../img/cute_burrito.png";
-import "./square.css";
 
 /* Component that represents each individual square on the board. */
 const Square = (props) => {

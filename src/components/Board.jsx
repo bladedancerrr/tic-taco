@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Square from "./Square";
 import EndgamePopup from "./EndgamePopup";
+import { getWinner } from "./WinCheck";
 /* Component that represents the tic-tac-toe board made up of squares. */
 
 class Board extends Component {
@@ -10,11 +11,17 @@ class Board extends Component {
     /* Which player occupies which part of the board. */
     clickState: new Array(3 * 3).fill(0),
     winner: 0,
+    turn: 0,
   };
 
   onReset = () => {
     const clickState = new Array(3 * 3).fill(0);
-    this.setState({ clickState: clickState, playerTurn: 1, winner: 0 });
+    this.setState({
+      clickState: clickState,
+      playerTurn: 1,
+      winner: 0,
+      turn: 0,
+    });
   };
 
   render() {
@@ -73,98 +80,39 @@ class Board extends Component {
     );
   };
 
-  gameShouldEnd(squareId) {
-    const winner = this.getWinner(squareId);
-    if (winner !== 0) {
-      this.setState({ winner: winner });
-    }
-  }
-
-  getWinner = (squareId) => {
-    const winner = this.checkForWinner(squareId);
-    if (winner !== 0) {
-      console.log(
-        `This winnnerrr is ${winner === 1 ? "player 1" : "player 2"}`
-      );
-    }
-    return winner;
-  };
-
-  checkForWinner = (squareId) => {
-    /* Check for the three horizontal squares and vertical squares to see if they all have the same value (1 / 2) */
-    // console.log(this.state.clickState);
-    if (this.state.clickState[squareId] === 0) {
-      console.error(`Square ${squareId} is meant to be selected!`);
-      return 0;
-    }
-
-    const played = this.state.clickState[squareId];
-    /* Get the row and column the square is in */
-    const row = Math.floor(squareId / 3);
-    const col = squareId - row * 3;
-
-    return this.checkRow(row, played) ||
-      this.checkCol(col, played) ||
-      this.checkDiags(played)
-      ? played
-      : 0;
-  };
-
-  checkRow(row, player) {
-    const start = row * 3;
-    for (let i = 0; i < 3; i++) {
-      if (this.state.clickState[start + i] !== player) return false;
-    }
-
-    return true;
-  }
-
-  checkCol(col, player) {
-    for (let i = 0; i < 3; i++) {
-      if (this.state.clickState[col + i * 3] !== player) return false;
-    }
-
-    return true;
-  }
-
-  checkDiags(player) {
-    const diag1 = [0, 4, 8];
-    const diag2 = [2, 4, 6];
-
-    return this.checkDiag(diag1, player) || this.checkDiag(diag2, player);
-  }
-
-  checkDiag(diag, player) {
-    for (let i = 0; i < diag.length; i++) {
-      let square = diag[i];
-      if (this.state.clickState[square] !== player) return false;
-    }
-    return true;
-  }
-
   renderModal = () => {
-    const shouldShow = this.state.winner === 0 ? false : true;
+    const won = this.state.winner === 0 ? false : true;
+    const drew = this.state.turn === 9 ? true : false;
+
+    let message = "";
+    if (won) message = `Player ${this.state.winner} won!`;
+    else if (drew) message = `It's a draw!`;
+
     return (
       <EndgamePopup
-        show={shouldShow}
+        show={won || drew}
         winner={this.state.winner}
         onHide={this.onReset}
+        message={message}
       />
     );
   };
 
   handleClick(squareId) {
-    /* If the button is clicked, it's value is set to playerTurn, signifying 
+    /* If the button is clicked, its value is set to playerTurn, signifying 
     which player played it. */
     const clickState = [...this.state.clickState];
     const playerTurn = this.state.playerTurn;
     /* If the button has not been clicked before, then change clickState. */
-    if (clickState[squareId] === 0) {
+    const notClickedBefore = clickState[squareId] === 0;
+    if (notClickedBefore) {
       clickState[squareId] = playerTurn;
+      const nextTurn = this.state.turn + 1;
       this.setState(
         {
           clickState: clickState,
           playerTurn: playerTurn === 1 ? 2 : 1,
+          turn: nextTurn,
         },
         /* Since setState is async, perform winCheck callback after state update */
         /* Once a burrito has been placed, check if there is a winner */
@@ -172,16 +120,13 @@ class Board extends Component {
       );
     }
   }
+
+  gameShouldEnd = (squareId) => {
+    const winner = getWinner(this.state.clickState, squareId);
+    if (winner !== 0) {
+      this.setState({ winner: winner });
+    }
+  };
 }
 
 export default Board;
-
-// function LaunchModal(shouldShow) {
-//   const [modalShow, setModalShow] = React.useState(shouldShow);
-//   return (
-//     <MyVerticallyCenteredModal
-//       show={modalShow}
-//       onHide={() => setModalShow(false)}
-//     />
-//   );
-// }
