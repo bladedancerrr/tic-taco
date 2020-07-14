@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Square from "./square";
-import EndgamePopup from "./modal";
+import Square from "./Square";
+import EndgamePopup from "./EndgamePopup";
 /* Component that represents the tic-tac-toe board made up of squares. */
 
 class Board extends Component {
@@ -12,16 +12,10 @@ class Board extends Component {
     winner: 0,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.onReset = this.onReset.bind(this);
-  }
-
-  onReset() {
+  onReset = () => {
     const clickState = new Array(3 * 3).fill(0);
     this.setState({ clickState: clickState, playerTurn: 1, winner: 0 });
-  }
+  };
 
   render() {
     return (
@@ -154,13 +148,9 @@ class Board extends Component {
       <EndgamePopup
         show={shouldShow}
         winner={this.state.winner}
-        onHide={this.handleHide}
+        onHide={this.onReset}
       />
     );
-  };
-
-  handleHide = () => {
-    this.onReset();
   };
 
   handleClick(squareId) {
