@@ -15,8 +15,11 @@ function EndgamePopup(props) {
       centered
     >
       <Modal.Header closeButton onClick={onHide}>
-        <Modal.Title id="contained-modal-title-vcenter">
-          <h4>Game over! </h4>
+        <Modal.Title
+          style={{ textAlign: "center" }}
+          id="contained-modal-title-vcenter"
+        >
+          <h4 style={{ textAlign: "center" }}>Game over! </h4>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

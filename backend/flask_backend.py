@@ -2,24 +2,31 @@
 
 from flask import Flask, jsonify, request
 from flask_restful import Resource, Api
+from flask_cors import CORS
 from minimax import *
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"*": {"origins": "*"}})
 api = Api(app)
 
 
 class HelloWord(Resource):
     # get request
     def get(self):
-        return {"Tic-Taco": "Made with <3 by Pete & Aye"}
+        return "Hellooo"
 
     # post request
     def post(self):
         rec_json = request.get_json()
-        return {'Hey there! You\'ve sent': rec_json}, 201
+        print(rec_json["clickState"])
+        click_state = rec_json["clickState"]
+
+        # TODO:
+        # aiMove(clickState)
+        return 0, 201, {'Access-Control-Allow-Origin': '*'}
 
 
-# set up api resource routing
+    # set up api resource routing
 api.add_resource(HelloWord, '/')
 
 if __name__ == "__main__":

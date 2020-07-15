@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Square from "./Square";
-import EndgamePopup, { renderModal } from "./EndgamePopup";
+import { renderModal } from "./EndgamePopup";
 import { getWinner } from "./WinCheck";
+import axios from "axios";
+
 /* Component that represents the tic-tac-toe board made up of squares. */
 
 class Board extends Component {
@@ -103,6 +105,12 @@ class Board extends Component {
         /* Once a burrito has been placed, check if there is a winner */
         () => this.gameShouldEnd(squareId)
       );
+
+      /* If the player is playing against an AI, send the clickState to backend for analysis */
+      axios
+        .post("http://localhost:5000/", { clickState: this.state.clickState })
+        .then((Response) => console.log(Response))
+        .catch((Error) => console.log(Error));
     }
   }
 
