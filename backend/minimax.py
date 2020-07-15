@@ -15,35 +15,32 @@ def evaluate(board_state, player):
     values = {player: 2, opponent: -1, blank: 1}
 
     # Keep track of the score of rows, col and diag separately
-    np_board = np.array(board_state)
+    np_board = np.array(board_state).reshape(3, 3)
     scores = {}
-    scores["rows"] = evalArray(get_rows(np_board), values)
-    scores["cols"] = evalArray(get_cols(np_board), values)
+
+    rows = get_rows(np_board)
+    cols = get_cols(np_board)
+    diags = get_diags(np_board)
+
+    scores["rows"] = evalArray(rows, values)
+    scores["cols"] = evalArray(cols, values)
     scores["diags"] = evalArray(get_diags(np_board), values)
 
     return scores
 
 
 def get_rows(np_board):
-    rows = []
-    for i in (0, 3, 6):
-        row = list(np_board[[i, i+1, i+2]])
-        rows.append(row)
-    return rows
+    return np_board.tolist()
 
 
 def get_cols(np_board):
-    cols = []
-    for i in (0, 1, 2):
-        col = list(np_board[[i, i+3, i+6]])
-        cols.append(col)
-    return cols
+    return np_board.transpose().tolist()
 
 
 def get_diags(np_board):
-    diag1 = list(np_board[[0, 4, 8]])
-    diag2 = list(np_board[[2, 4, 6]])
-    return [diag1, diag2]
+    maj_diag = np.diagonal(np_board).tolist()
+    min_diag = np.diagonal(np.rot90(np_board).tolist())
+    return [maj_diag, min_diag]
 
 
 def evalArray(arrays, values):
