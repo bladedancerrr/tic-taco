@@ -13,11 +13,12 @@ class Node(object):
             # Iterate through the blank states and add children
             for i, square in enumerate(self.board):
                 if square == 0:
-                    child = self.board.copy()
-                    child[i] = player_no
+
+                    child = Node(self.board.copy())
+                    child.board[i] = player_no
                     self.add_child(child)
                     # Recursive call to generate the next level
-                    self.generate_nodes(
+                    child.generate_nodes(
                         depth=depth-1, player_no=1 if player_no == 2 else 2)
 
     def get_blank_count(self):
@@ -36,7 +37,7 @@ class Tree(object):
     def __generate_tree(self):
         # TODO:
         # Fixing the depth to 2 for now, the actual value is subject to change
-        depth = 2 if self.root.get_blank_count() >= 2 else 1
+        depth = 3 if self.root.get_blank_count() >= 2 else 1
         # TODO: The AI player is assumed to go second at the moment, change later
         ai_player = 2
 
@@ -46,4 +47,4 @@ class Tree(object):
 if __name__ == "__main__":
     n = Node([0, 1, 1, 2, 2, 0, 0, 0, 0])
     t = Tree(n)
-    print(t)
+    print()
