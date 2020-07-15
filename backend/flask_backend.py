@@ -10,7 +10,7 @@ cors = CORS(app, resources={r"*": {"origins": "*"}})
 api = Api(app)
 
 
-class HelloWord(Resource):
+class TicTacoAPI(Resource):
     # get request
     def get(self):
         return "Hellooo"
@@ -27,7 +27,7 @@ class HelloWord(Resource):
 
 
     # set up api resource routing
-api.add_resource(HelloWord, '/')
+api.add_resource(TicTacoAPI, '/')
 
 if __name__ == "__main__":
     app.run()
