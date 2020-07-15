@@ -1,4 +1,3 @@
-from tree import *
 import numpy as np
 # returns the square id of the move AI is going to make
 
@@ -18,9 +17,9 @@ def evaluate(board_state, player):
     # Keep track of the score of rows, col and diag separately
     np_board = np.array(board_state)
     scores = {}
-    scores["rows"] = evalRows(get_rows(np_board), values)
-    scores["cols"] = evalColumns(get_cols(np_board), values)
-    scores["diags"] = evalDiags(get_diags(np_board), values)
+    scores["rows"] = evalArray(get_rows(np_board), values)
+    scores["cols"] = evalArray(get_cols(np_board), values)
+    scores["diags"] = evalArray(get_diags(np_board), values)
 
     return scores
 
@@ -47,33 +46,6 @@ def get_diags(np_board):
     return [diag1, diag2]
 
 
-def evalColumns(columns, values):
-    # return evalution of the columns
-    evals = []
-    for column in columns:
-        currEval = 0
-        for val in column:
-            currEval += values[val]
-        evals.append(currEval)
-    return evals
-
-
-def evalRows(rows, values):
-    # return evaluation of the rows
-    evals = []
-    for row in rows:
-        currEval = 0
-        for val in row:
-            currEval += values[val]
-        evals.append(currEval)
-    return evals
-
-
-def evalDiags(diags, values):
-    evals = []
-    for diag in diags:
-        currEval = 0
-        for val in diag:
-            currEval += values[val]
-        evals.append(currEval)
-    return evals
+def evalArray(arrays, values):
+    # return an array of with the sums of the weights of each sub-array in arrays
+    return([sum(values[val] for val in arr) for arr in arrays])

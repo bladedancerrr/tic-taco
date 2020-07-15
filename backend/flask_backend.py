@@ -13,7 +13,7 @@ api = Api(app)
 class TicTacoAPI(Resource):
     # get request
     def get(self):
-        return "Hellooo"
+        return "Tic Taco made with <3 by Aye & Pete"
 
     # post request
     def post(self):
