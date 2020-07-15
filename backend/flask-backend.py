@@ -2,12 +2,13 @@
 
 from flask import Flask, jsonify, request
 from flask_restful import Resource, Api
+from minimax import *
 
 app = Flask(__name__)
 api = Api(app)
 
 
-class HelloWord(resource):
+class HelloWord(Resource):
     # get request
     def get(self):
         return {"Tic-Taco": "Made with <3 by Pete & Aye"}
