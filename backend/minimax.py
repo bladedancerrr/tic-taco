@@ -11,7 +11,7 @@ def evaluate(board_state, player):
     """
     player - taco / burrito
     """
-    opponent = 1 if player == 2 else 1
+    opponent = 1 if player == 2 else 2
     blank = 0
     values = {player: 2, opponent: -1, blank: 1}
 
@@ -22,7 +22,7 @@ def evaluate(board_state, player):
     scores["cols"] = evalColumns(get_cols(np_board), values)
     scores["diags"] = evalDiags(get_diags(np_board), values)
 
-    print(scores)
+    return scores
 
 
 def get_rows(np_board):
@@ -49,7 +49,6 @@ def get_diags(np_board):
 
 def evalColumns(columns, values):
     # return evalution of the columns
-    print(values)
     evals = []
     for column in columns:
         currEval = 0
@@ -78,7 +77,3 @@ def evalDiags(diags, values):
             currEval += values[val]
         evals.append(currEval)
     return evals
-
-
-if __name__ == "__main__":
-    evaluate([1, 0, 0, 0, 0, 0, 0, 0, 0], 1)
