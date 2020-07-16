@@ -59,8 +59,6 @@ def evaluate(node, player):
     diag = get_diag(np_board, node.move)
 
     move_score = evalArrays([row, col, diag], values)
-    # print(row, col, diag)
-    # print(move_score)
     return sum(move_score)
 
 
@@ -87,24 +85,6 @@ def get_diag(np_board, square_id):
 def evalArrays(arrays, values):
     # return an array of with the sums of the weights of each sub-array in arrays
     return([sum(values[val] for val in arr) for arr in arrays])
-
-    #     # return an array of with the sums of the weights of each sub-array in arrays
-    #     return([sum(values[val] for val in arr) for arr in arrays])
-
-    # def get_rows(np_board):
-    #     return np_board.tolist()
-
-    # def get_cols(np_board):
-    #     return np_board.transpose().tolist()
-
-    # def get_diags(np_board):
-    #     maj_diag = np.diagonal(np_board).tolist()
-    #     min_diag = np.diagonal(np.rot90(np_board).tolist())
-    #     return [maj_diag, min_diag]
-
-    # def evalArrays(arrays, values):
-    #     # return an array of with the sums of the weights of each sub-array in arrays
-    #     return([sum(values[val] for val in arr) for arr in arrays])
 
 
 if __name__ == "__main__":
