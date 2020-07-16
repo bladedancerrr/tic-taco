@@ -33,11 +33,7 @@ const Square = (props) => {
   };
 
   return (
-    <button
-      className="squareElement"
-      onClick={() => onClick(id)}
-      style={squareStyle}
-    >
+    <button id="square_element" onClick={() => onClick(id)} style={squareStyle}>
       {renderImage(imgSrc, playerTurn)}
     </button>
   );

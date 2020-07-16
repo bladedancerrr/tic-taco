@@ -31,7 +31,7 @@ class Board extends Component {
   render() {
     return (
       /* Rendering 3x3 grid. */
-      <div className="container">
+      <div id="board_container" style={{ marginTop: 200 }}>
         <div>
           <div>
             {this.renderSquare(0)}
