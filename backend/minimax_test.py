@@ -1,5 +1,6 @@
 import unittest
 from minimax import get_row, get_col, get_diag
+import numpy as np
 
 player1 = 1
 player2 = 2
@@ -13,20 +14,23 @@ values_2 = {player2: 2, opponent1: -1, empty: 1}
 
 class TestGetRow(unittest.TestCase):
 
-    def row_zero(self, board):
+    def test_row_zero(self):
         board = [1, 0, 0, 0, 0, 0, 0, 0, 0]
         square_id = 0
-        self.assertEqual(get_row(board, square_id), 0)
+        np_board = np.array(board).reshape(3, 3)
+        self.assertEqual(get_row(np_board, square_id), [1, 0, 0])
 
-    def row_one(self, board):
+    def test_row_one(self):
         board = [0, 0, 0, 0, 1, 0, 0, 0, 0]
         square_id = 5
-        self.assertEqual(get_row(board, square_id), 1)
+        np_board = np.array(board).reshape(3, 3)
+        self.assertEqual(get_row(np_board, square_id), [0, 1, 0])
 
-    def row_second(self, board):
+    def test_row_second(self):
         board = [0, 0, 0, 0, 0, 0, 0, 0, 1]
         square_id = 8
-        self.assertEqual(get_row(board, square_id), 2)
+        np_board = np.array(board).reshape(3, 3)
+        self.assertEqual(get_row(np_board, square_id), [0, 0, 1])
 
 
 # class TestEvalColumns(unittest.TestCase):

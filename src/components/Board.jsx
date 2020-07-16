@@ -15,6 +15,7 @@ class Board extends Component {
     winner: 0,
     /* Current turn number of game from 0 - 9. */
     turn: 0,
+    gameMode: this.props.option,
   };
 
   /* Resetting grid to be empty. */
@@ -93,26 +94,54 @@ class Board extends Component {
     playerTurn and turn. */
     const notClickedBefore = clickState[squareId] === 0;
     if (notClickedBefore) {
-      clickState[squareId] = playerTurn;
-      const nextTurn = this.state.turn + 1;
-      this.setState(
-        {
-          clickState: clickState,
-          playerTurn: playerTurn === 1 ? 2 : 1,
-          turn: nextTurn,
-        },
-        /* Since setState is async, perform winCheck callback after state update */
-        /* Once a burrito has been placed, check if there is a winner */
-        () => this.gameShouldEnd(squareId)
-      );
-
-      /* If the player is playing against an AI, send the clickState to backend for analysis */
-      axios
-        .post("http://localhost:5000/", { clickState: this.state.clickState })
-        .then((Response) => console.log(Response))
-        .catch((Error) => console.log(Error));
+      this.updateSquare(squareId);
     }
   }
+
+  componentDidUpdate = (prevProps) => {
+    console.log("player turn ", this.state.playerTurn);
+    const gameModeAI = this.state.gameMode === "AI";
+    if (this.state.playerTurn === 2 && gameModeAI) {
+      // this.handleClick(this.getAIMove());
+      console.log("generating AI move");
+      const move = await this.getAIMove();
+      this.handleClick(move);
+    }
+  };
+
+  updateSquare = (squareId) => {
+    // renders a square according to AI move
+
+    const clickState = [...this.state.clickState];
+    const playerTurn = this.state.playerTurn;
+
+    clickState[squareId] = playerTurn;
+    const nextTurn = this.state.turn + 1;
+
+    this.setState(
+      {
+        clickState: clickState,
+        playerTurn: playerTurn === 1 ? 2 : 1,
+        turn: nextTurn,
+      },
+      /* Since setState is async, perform winCheck callback after state update */
+      /* Once a burrito has been placed, check if there is a winner */
+      () => this.gameShouldEnd(squareId)
+    );
+  };
+
+  getAIMove = async () => {
+    /* If the player is playing against an AI, send the clickState to backend for analysis */
+    try {
+      axios
+        .post("http://localhost:5000/", { clickState: this.state.clickState })
+        .then((Response) => console.log(Response["data"]))
+        .catch((Error) => console.log(Error));
+      return Response["data"];
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   gameShouldEnd = (squareId) => {
     const winner = getWinner(this.state.clickState, squareId);

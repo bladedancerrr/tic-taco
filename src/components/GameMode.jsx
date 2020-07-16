@@ -31,7 +31,7 @@ const GameMode = () => {
 
 function renderGrid(event) {
   const option = event.target.getAttribute("id");
-  console.log(option);
+  console.log("User selected ", option);
   ReactDOM.render(
     <Board option={option} />,
     document.getElementById("main_container")
