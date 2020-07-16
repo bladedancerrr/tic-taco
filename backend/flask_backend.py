@@ -20,10 +20,7 @@ class TicTacoAPI(Resource):
         rec_json = request.get_json()
         print(rec_json["clickState"])
         click_state = rec_json["clickState"]
-
-        # TODO:
-        # aiMove(clickState)
-        return 0, 201, {'Access-Control-Allow-Origin': '*'}
+        return generate_AI_move(clickState), 201, {'Access-Control-Allow-Origin': '*'}
 
 
     # set up api resource routing
