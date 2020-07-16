@@ -15,6 +15,7 @@ class Board extends Component {
     winner: 0,
     /* Current turn number of game from 0 - 9. */
     turn: 0,
+    /* Whether player is playing against AI or another human. */
     gameMode: this.props.option,
   };
 
@@ -27,6 +28,19 @@ class Board extends Component {
       winner: 0,
       turn: 0,
     });
+  };
+
+  componentDidUpdate = (prevProps) => {
+    console.log("player turn ", this.state.playerTurn);
+    console.log("game turn", this.state.turn);
+    const gameModeisAI = this.state.gameMode === "AI";
+
+    if (this.state.playerTurn === 2 && gameModeisAI && this.state.turn < 9) {
+      // this.handleClick(this.getAIMove());
+      console.log("generating AI move");
+      const move = this.getAIMove();
+      this.handleClick(move);
+    }
   };
 
   render() {
@@ -88,31 +102,18 @@ class Board extends Component {
     /* If the button is clicked, its value is set to playerTurn, signifying 
     which player played it. */
     const clickState = [...this.state.clickState];
-    const playerTurn = this.state.playerTurn;
 
     /* If the button has not been clicked before, then change clickState and update 
     playerTurn and turn. */
     const notClickedBefore = clickState[squareId] === 0;
     if (notClickedBefore) {
-      this.updateSquare(squareId);
+      this.updateSquare(squareId, clickState);
     }
   }
 
-  componentDidUpdate = (prevProps) => {
-    console.log("player turn ", this.state.playerTurn);
-    const gameModeAI = this.state.gameMode === "AI";
-    if (this.state.playerTurn === 2 && gameModeAI) {
-      // this.handleClick(this.getAIMove());
-      console.log("generating AI move");
-      const move = await this.getAIMove();
-      this.handleClick(move);
-    }
-  };
-
-  updateSquare = (squareId) => {
+  updateSquare = (squareId, clickState) => {
     // renders a square according to AI move
 
-    const clickState = [...this.state.clickState];
     const playerTurn = this.state.playerTurn;
 
     clickState[squareId] = playerTurn;
