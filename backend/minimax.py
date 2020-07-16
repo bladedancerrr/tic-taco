@@ -1,8 +1,14 @@
 import numpy as np
+from tree import *
 # returns the square id of the move AI is going to make
 
 
 def generate_AI_move(click_state):
+    states = Tree(Node(click_state))
+    minimax()
+
+
+def minimax(Node, depth, maximizingPlayer):
     pass
 
 
@@ -24,7 +30,7 @@ def evaluate(board_state, player):
 
     scores["rows"] = evalArray(rows, values)
     scores["cols"] = evalArray(cols, values)
-    scores["diags"] = evalArray(get_diags(np_board), values)
+    scores["diags"] = evalArray(diags, values)
 
     return scores
 
