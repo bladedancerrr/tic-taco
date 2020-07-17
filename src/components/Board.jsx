@@ -94,12 +94,12 @@ class Board extends Component {
     if (this.state.gameMode === "AI") {
       text = "Your turn!";
       if (this.state.playerTurn == 2) {
-        text = " AI is thinking ..... ";
+        text = "baby burrito is thinking ..... ";
       }
     } else {
       text = "adorable taco's turn!";
       if (this.state.playerTurn == 2) {
-        text = "baby burrito' turn!";
+        text = "baby burrito's turn!";
       }
     }
 
