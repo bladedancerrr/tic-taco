@@ -30,19 +30,6 @@ class Board extends Component {
     });
   };
 
-  componentDidUpdate = (prevProps) => {
-    console.log("player turn ", this.state.playerTurn);
-    console.log("game turn", this.state.turn);
-    const gameModeisAI = this.state.gameMode === "AI";
-
-    if (this.state.playerTurn === 2 && gameModeisAI && this.state.turn < 9) {
-      // this.handleClick(this.getAIMove());
-      console.log("generating AI move");
-      const move = this.getAIMove();
-      this.handleClick(move);
-    }
-  };
-
   render() {
     return (
       /* Rendering 3x3 grid. */
@@ -113,7 +100,6 @@ class Board extends Component {
 
   updateSquare = (squareId, clickState) => {
     // renders a square according to AI move
-
     const playerTurn = this.state.playerTurn;
 
     clickState[squareId] = playerTurn;
@@ -131,17 +117,24 @@ class Board extends Component {
     );
   };
 
+  componentDidUpdate = async (prevProps) => {
+    const gameModeisAI = this.state.gameMode === "AI";
+
+    if (this.state.playerTurn === 2 && gameModeisAI && this.state.turn < 9) {
+      await this.getAIMove();
+    }
+  };
+
   getAIMove = async () => {
     /* If the player is playing against an AI, send the clickState to backend for analysis */
     try {
-      axios
+      await axios
         .post("http://localhost:5000/", { clickState: this.state.clickState })
-        .then((Response) => console.log(Response["data"]))
-        .catch((Error) => console.log(Error));
-      return Response["data"];
+        .then((Response) => this.handleClick(Response["data"]));
     } catch (e) {
       console.error(e);
     }
+    return Response["data"];
   };
 
   gameShouldEnd = (squareId) => {
