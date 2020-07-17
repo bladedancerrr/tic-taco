@@ -3,6 +3,7 @@ import Square from "./Square";
 import { renderModal } from "./EndgamePopup";
 import { getWinner } from "./WinCheck";
 import axios from "axios";
+import { sleep } from "./utils";
 
 /* Component that represents the tic-tac-toe board made up of squares. */
 
@@ -34,6 +35,8 @@ class Board extends Component {
     return (
       /* Rendering 3x3 grid. */
       <div id="board_container" style={{ marginTop: 200 }}>
+        <div>{this.renderAIText()}</div>
+
         <div>
           <div>
             {this.renderSquare(0)}
@@ -85,6 +88,24 @@ class Board extends Component {
     );
   };
 
+  renderAIText = () => {
+    var text = "";
+
+    if (this.state.gameMode === "AI") {
+      text = "Your turn!";
+      if (this.state.playerTurn == 2) {
+        text = " AI is thinking ..... ";
+      }
+    } else {
+      text = "adorable taco's turn!";
+      if (this.state.playerTurn == 2) {
+        text = "baby burrito' turn!";
+      }
+    }
+
+    return text;
+  };
+
   handleClick(squareId) {
     /* If the button is clicked, its value is set to playerTurn, signifying 
     which player played it. */
@@ -127,6 +148,7 @@ class Board extends Component {
 
   getAIMove = async () => {
     /* If the player is playing against an AI, send the clickState to backend for analysis */
+    await sleep(2000);
     try {
       await axios
         .post("http://localhost:5000/", { clickState: this.state.clickState })
