@@ -4,7 +4,7 @@ import cuteBurrito from "../img/cute_burrito.png";
 
 /* Component that represents each individual square on the board. */
 const Square = (props) => {
-  const { id, onClick, playerTurn } = props;
+  const { id, onClick, playerTurn, disabled } = props;
 
   /* Setting image source depening on whether player 1 or 2 is playing, or if 
   button has not been clicked before. */
@@ -33,7 +33,12 @@ const Square = (props) => {
   };
 
   return (
-    <button id="square_element" onClick={() => onClick(id)} style={squareStyle}>
+    <button
+      id="square_element"
+      onClick={() => onClick(id)}
+      style={squareStyle}
+      disabled={disabled}
+    >
       {renderImage(imgSrc, playerTurn)}
     </button>
   );

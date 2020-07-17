@@ -32,26 +32,9 @@ class Board extends Component {
 
   render() {
     return (
-      /* Rendering 3x3 grid. */
+      /* Rendering 3x3 grid with buttons enabled. */
       <div id="board_container" style={{ marginTop: 200 }}>
-        <div>
-          <div>
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
-          </div>
-          <div>
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
-          </div>
-          <div>
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
-          </div>
-        </div>
-
+        {this.renderGrid(false)}
         <button
           onClick={this.onReset}
           style={{
@@ -74,18 +57,41 @@ class Board extends Component {
     );
   }
 
+  renderGrid = (isDisabled) => {
+    return (
+      <div id="grid">
+        <div>
+          {this.renderSquare(0, isDisabled)}
+          {this.renderSquare(1, isDisabled)}
+          {this.renderSquare(2, isDisabled)}
+        </div>
+        <div>
+          {this.renderSquare(3, isDisabled)}
+          {this.renderSquare(4, isDisabled)}
+          {this.renderSquare(5, isDisabled)}
+        </div>
+        <div>
+          {this.renderSquare(6, isDisabled)}
+          {this.renderSquare(7, isDisabled)}
+          {this.renderSquare(8, isDisabled)}
+        </div>
+      </div>
+    );
+  };
+
   /* Renders the square in grid. */
-  renderSquare = (squareId) => {
+  renderSquare = (squareId, isDisabled) => {
     return (
       <Square
         id={squareId}
         onClick={() => this.handleClick(squareId)}
         playerTurn={this.state.clickState[squareId]}
+        disabled={isDisabled}
       />
     );
   };
 
-  handleClick(squareId) {
+  handleClick = (squareId) => {
     /* If the button is clicked, its value is set to playerTurn, signifying 
     which player played it. */
     const clickState = [...this.state.clickState];
@@ -96,7 +102,7 @@ class Board extends Component {
     if (notClickedBefore) {
       this.updateSquare(squareId, clickState);
     }
-  }
+  };
 
   updateSquare = (squareId, clickState) => {
     // renders a square according to AI move
@@ -121,6 +127,7 @@ class Board extends Component {
     const gameModeisAI = this.state.gameMode === "AI";
 
     if (this.state.playerTurn === 2 && gameModeisAI && this.state.turn < 9) {
+      document.querySelector("button").setAttribute("disabled", true);
       await this.getAIMove();
     }
   };
