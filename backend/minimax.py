@@ -1,5 +1,5 @@
 import numpy as np
-from tree import *
+from tree import Node, Tree
 from utils import is_game_over
 
 # TODO: AI is assumed to go second here, subject to change

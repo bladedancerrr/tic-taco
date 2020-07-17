@@ -18,20 +18,68 @@ class TestGetRow(unittest.TestCase):
         board = [1, 0, 0, 0, 0, 0, 0, 0, 0]
         square_id = 0
         np_board = np.array(board).reshape(3, 3)
-        self.assertEqual(get_row(np_board, square_id), [1, 0, 0])
+        self.assertTrue(np.array_equal(
+            get_row(np_board, square_id), [1, 0, 0]))
 
     def test_row_one(self):
         board = [0, 0, 0, 0, 1, 0, 0, 0, 0]
-        square_id = 5
+        square_id = 4
         np_board = np.array(board).reshape(3, 3)
-        self.assertEqual(get_row(np_board, square_id), [0, 1, 0])
+        self.assertTrue(np.array_equal(
+            get_row(np_board, square_id), [0, 1, 0]))
 
     def test_row_second(self):
         board = [0, 0, 0, 0, 0, 0, 0, 0, 1]
         square_id = 8
         np_board = np.array(board).reshape(3, 3)
-        self.assertEqual(get_row(np_board, square_id), [0, 0, 1])
+        self.assertTrue(np.array_equal(
+            get_row(np_board, square_id), [0, 0, 1]))
 
+
+class TestGetCol(unittest.TestCase):
+    def test_col_zero(self):
+        board = [1, 0, 0, 0, 0, 0, 0, 0, 0]
+        square_id = 0
+        np_board = np.array(board).reshape(3, 3)
+        self.assertTrue(np.array_equal(
+            get_col(np_board, square_id), [1, 0, 0]))
+
+    def test_col_one(self):
+        board = [0, 0, 0, 0, 0, 1, 0, 0, 0]
+        square_id = 5
+        np_board = np.array(board).reshape(3, 3)
+        self.assertTrue(np.array_equal(
+            get_col(np_board, square_id), [0, 1, 0]))
+
+    def test_col_two(self):
+        board = [0, 1, 0, 0, 2, 0, 0, 1, 0]
+        square_id = 7
+        np_board = np.array(board).reshape(3, 3)
+        self.assertTrue(np.array_equal(
+            get_col(np_board, square_id), [1, 2, 1]))
+
+
+class TestDiag(unittest.TestCase):
+    def test_diag_one(self):
+        board = [1, 0, 0, 0, 2, 0, 0, 0, 1]
+        square_id = 0
+        np_board = np.array(board).reshape(3, 3)
+        self.assertTrue(np.array_equal(
+            get_diag(np_board, square_id), [1, 2, 1]))
+
+    def test_diag_two(self):
+        board = [0, 0, 1, 0, 2, 0, 1, 0, 1]
+        square_id = 6
+        np_board = np.array(board).reshape(3, 3)
+        self.assertTrue(np.array_equal(
+            get_diag(np_board, square_id), [1, 2, 1]))
+
+    def test_not_on_diag(self):
+        board = [0, 0, 1, 0, 2, 0, 1, 2, 1]
+        square_id = 7
+        np_board = np.array(board).reshape(3, 3)
+        self.assertTrue(np.array_equal(
+            get_diag(np_board, square_id), [-1, -1, -1]))
 
 # class TestEvalColumns(unittest.TestCase):
 #     def test_zeros(self):
