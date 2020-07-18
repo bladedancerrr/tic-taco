@@ -7,3 +7,24 @@
   margin: 30;
   border-radius: 20;
 } */
+
+.GameModeButton {
+  border-width: "thin";
+  height: 200px;
+  outline: "none";
+  width: 300px;
+  vertical-align: "top";
+  margin: 30px;
+  border-radius: 20px;
+}
+
+.GameModeImage {
+  height: 90px;
+  width: 90px;
+}
+
+.GameModeText {
+  font-size: 20px;
+  font-family: "Carter One";
+  margin-top: 30px;
+}

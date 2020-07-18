@@ -4,7 +4,7 @@ import { renderModal } from "./EndgamePopup";
 import { getWinner } from "./WinCheck";
 import axios from "axios";
 import { sleep } from "./utils";
-
+import "./Board.css";
 /* Component that represents the tic-tac-toe board made up of squares. */
 
 class Board extends Component {
@@ -59,21 +59,7 @@ class Board extends Component {
           </div>
         </div>
 
-        <button
-          onClick={this.onReset}
-          style={{
-            width: 135,
-            height: 45,
-            textAlign: "center",
-            marginTop: 30,
-            borderRadius: 20,
-            outline: "none",
-            border: "none",
-            backgroundColor: "#90EE90",
-            borderColor: "#90EE90",
-            fontFamily: "Carter One",
-          }}
-        >
+        <button className="ResetButton" onClick={this.onReset}>
           Start over!
         </button>
         {renderModal(this.state.winner, this.state.turn, this.onReset)}
