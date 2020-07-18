@@ -34,8 +34,12 @@ class Board extends Component {
   render() {
     return (
       /* Rendering 3x3 grid. */
-      <div id="board_container" style={{ marginTop: 200 }}>
-        <div style={{ fontSize: 30 }}>{this.renderAIText()}</div>
+      <div id="board_container" style={{ marginTop: 30 }}>
+        <div
+          style={{ fontFamily: "Carter One", fontSize: 30, marginBottom: 30 }}
+        >
+          {this.renderAIText()}
+        </div>
 
         <div>
           <div>
@@ -62,12 +66,12 @@ class Board extends Component {
             height: 45,
             textAlign: "center",
             marginTop: 30,
-            borderRadius: 30,
+            borderRadius: 20,
             outline: "none",
             border: "none",
             backgroundColor: "#90EE90",
             borderColor: "#90EE90",
-            fontFamily: "Avantgarde",
+            fontFamily: "Carter One",
           }}
         >
           Start over!
@@ -94,12 +98,12 @@ class Board extends Component {
     if (this.state.gameMode === "AI") {
       text = "Your turn!";
       if (this.state.playerTurn === 2) {
-        text = "baby burrito is thinking ..... ";
+        text = "Baby Burrito is thinking... ";
       }
     } else {
-      text = "adorable taco's turn!";
+      text = "Adorable Taco's turn!";
       if (this.state.playerTurn === 2) {
-        text = "baby burrito's turn!";
+        text = "Baby Burrito's turn!";
       }
     }
 

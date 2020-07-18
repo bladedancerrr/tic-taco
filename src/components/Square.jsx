@@ -26,9 +26,9 @@ const Square = (props) => {
     backgroundColor: bgdColor,
     borderColor: "black",
     borderWidth: "thin",
-    height: 130,
+    height: 170,
     outline: "none",
-    width: 130,
+    width: 170,
     verticalAlign: "top",
   };
 
@@ -48,7 +48,7 @@ function renderImage(imgSrc, playerTurn) {
     <img
       src={imgSrc}
       alt="This a cute Mexican snack :3"
-      style={{ width: 100, height: 67 }}
+      style={{ width: 120, height: 80 }}
     ></img>
   );
 }
