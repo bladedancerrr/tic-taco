@@ -1,8 +1,8 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import cuteTaco from "../img/cute_taco.png";
-import cuteBurrito from "../img/cute_burrito.png";
+import cuteTaco from "../media/cute_taco.png";
+import cuteBurrito from "../media/cute_burrito.png";
 
 function EndgamePopup(props) {
   const { won, draw, winner, onHide } = props;

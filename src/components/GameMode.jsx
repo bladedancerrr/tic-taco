@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Board from "./Board";
+import AnimeWOW from "../media/anime-wow-sound-effect.mp3";
 
 const GameMode = () => {
   return (
@@ -29,12 +30,21 @@ const GameMode = () => {
 };
 
 function renderGrid(event) {
+  let animeWow = new Audio(AnimeWOW);
+  animeWow.volume = 0.2;
+  animeWow.play();
+
   const option = event.target.getAttribute("id");
   console.log("User selected ", option);
   ReactDOM.render(
     <Board option={option} />,
     document.getElementById("main_container")
   );
+}
+
+function playEffect() {
+  const animeWow = new Audio("../media/anime-wow-sound-effect.mp3");
+  animeWow.play();
 }
 
 export default GameMode;
