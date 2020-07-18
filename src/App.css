@@ -1,12 +1,17 @@
 .window {
   text-align: center;
   background-color: lightblue;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   margin: 0px;
 }
 
 .header {
-  font-family: BlinkMacSystemFont;
+  font-family: "Carter One", cursive;
+  font-size: 100px;
+}
+
+.subheader {
   font-size: 40px;
+  font-family: "Carter One", cursive;
 }

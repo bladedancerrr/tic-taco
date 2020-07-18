@@ -35,7 +35,7 @@ class Board extends Component {
     return (
       /* Rendering 3x3 grid. */
       <div id="board_container" style={{ marginTop: 200 }}>
-        <div>{this.renderAIText()}</div>
+        <div style={{ fontSize: 30 }}>{this.renderAIText()}</div>
 
         <div>
           <div>

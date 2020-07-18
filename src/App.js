@@ -6,9 +6,8 @@ function App() {
   return (
     <div id="container" className="window">
       <nav>
-        <div className="header">
-          Tic Taco <br></br> It's tic tac toe, but kawaii UwU
-        </div>
+        <div className="header">Tic Taco</div>
+        <div className="subheader">It's Tic Tac Toe, but Kawaii UwU</div>
       </nav>
       <main id="main_container">
         <GameMode />
