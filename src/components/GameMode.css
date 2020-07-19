@@ -9,13 +9,23 @@
 } */
 
 .GameModeButton {
-  border-width: "thin";
+  border-width: 0px;
   height: 200px;
-  outline: "none";
+  outline: none;
   width: 300px;
   vertical-align: "top";
   margin: 30px;
   border-radius: 20px;
+  box-shadow: 4px 4px rgb(195, 194, 194);
+}
+
+.GameModeButton:active {
+  outline: none;
+  box-shadow: 2px 2px rgb(195, 194, 194);
+}
+
+.GameModeButton:focus {
+  outline: none;
 }
 
 .GameModeImage {

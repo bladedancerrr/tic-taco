@@ -41,7 +41,6 @@ function renderGrid(event) {
   let animeWow = new Audio(AnimeWOW);
   animeWow.volume = 0.2;
   animeWow.play();
-
   const option = event.target.getAttribute("id");
   console.log("User selected ", option);
   ReactDOM.render(

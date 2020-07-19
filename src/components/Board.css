@@ -8,5 +8,15 @@
   border: none;
   background-color: #ffc2e7;
   font-family: "Carter One";
-  box-shadow: 3px 3px #faa4d8;
+  box-shadow: 4px 4px #faa4d8;
+}
+
+.ResetButton:active {
+  box-shadow: 2px 2px #faa4d8;
+  outline: none;
+}
+
+.ResetButton:focus {
+  /* box-shadow: 8px 8px #faa4d8; */
+  outline: 0px;
 }
