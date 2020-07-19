@@ -5,7 +5,6 @@ import AnimeWOW from "../media/anime-wow-sound-effect.mp3";
 import cute_astronaut from "../media/cute_astronaut.png";
 import cute_robot from "../media/cute_robot.png";
 import "./GameMode.css";
-import { createBootstrapComponent } from "react-bootstrap/esm/ThemeProvider";
 // Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 // Icons made by <a href="https://www.flaticon.com/authors/photo3idea-studio" title="photo3idea_studio">photo3idea_studio</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
@@ -21,13 +20,13 @@ const GameMode = () => {
 
       <div style={{ marginTop: 30 }}>
         <button className="GameModeButton" onClick={renderGrid} id="AI">
-          <img src={cute_robot} className="GameModeImage"></img>
+          <img src={cute_robot} className="GameModeImage" alt=""></img>
           <br></br>
           <div className="GameModeText"> Riley the Robot </div>
         </button>
 
         <button className="GameModeButton" onClick={renderGrid} id="Human">
-          <img src={cute_astronaut} className="GameModeImage"></img>
+          <img src={cute_astronaut} className="GameModeImage" alt=""></img>
           <br></br>
           <div className="GameModeText">Another Human Bean </div>
         </button>
@@ -42,7 +41,6 @@ function renderGrid(event) {
   animeWow.volume = 0.2;
   animeWow.play();
   const option = event.target.getAttribute("id");
-  console.log("User selected ", option);
   ReactDOM.render(
     <Board option={option} />,
     document.getElementById("main_container")
