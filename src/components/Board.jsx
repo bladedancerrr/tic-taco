@@ -128,7 +128,7 @@ class Board extends Component {
     );
   };
 
-  componentDidUpdate = async (prevProps) => {
+  componentDidUpdate = async () => {
     const gameModeisAI = this.state.gameMode === "AI";
 
     if (this.state.playerTurn === 2 && gameModeisAI && this.state.turn < 9) {

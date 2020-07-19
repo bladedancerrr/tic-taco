@@ -1,6 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import Board from "./Board";
 import AnimeWOW from "../media/anime-wow-sound-effect.mp3";
 import cute_astronaut from "../media/cute_astronaut.png";
 import cute_robot from "../media/cute_robot.png";
@@ -13,19 +11,27 @@ const opponentChoiceStyle = {
   fontSize: 70,
 };
 
-const GameMode = () => {
+const GameMode = (props) => {
   return (
     <div id="game_mode_container" style={{ marginTop: 100 }}>
       <h1 style={opponentChoiceStyle}>Choose your opponent</h1>
 
       <div style={{ marginTop: 30 }}>
-        <button className="GameModeButton" onClick={renderGrid} id="AI">
+        <button
+          className="GameModeButton"
+          onClick={() => renderGrid("AI", props.selectGameMode)}
+          id="AI"
+        >
           <img src={cute_robot} className="GameModeImage" alt=""></img>
           <br></br>
           <div className="GameModeText"> Riley the Robot </div>
         </button>
 
-        <button className="GameModeButton" onClick={renderGrid} id="Human">
+        <button
+          className="GameModeButton"
+          onClick={() => renderGrid("Human", props.selectGameMode)}
+          id="Human"
+        >
           <img src={cute_astronaut} className="GameModeImage" alt=""></img>
           <br></br>
           <div className="GameModeText">Another Human Bean </div>
@@ -35,16 +41,16 @@ const GameMode = () => {
   );
 };
 
-function renderGrid(event) {
+function renderGrid(gameMode, selectGameMode) {
+  playSound();
+  selectGameMode(gameMode);
+}
+
+function playSound() {
   /* playing sound effect */
   let animeWow = new Audio(AnimeWOW);
   animeWow.volume = 0.2;
   animeWow.play();
-  const option = event.target.getAttribute("id");
-  ReactDOM.render(
-    <Board option={option} />,
-    document.getElementById("main_container")
-  );
 }
 
 export default GameMode;
