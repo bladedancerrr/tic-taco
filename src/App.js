@@ -3,6 +3,7 @@ import "./App.css";
 import GameMode from "./components/GameMode";
 import TopBanner from "./components/TopBanner";
 import Board from "./components/Board";
+import ScoreBoard from "./components/ScoreBoard";
 
 class App extends Component {
   state = { gameMode: null };
@@ -23,7 +24,13 @@ class App extends Component {
       return <GameMode selectGameMode={this.selectGameMode} />;
     else {
       const option = this.state.gameMode === "AI" ? "AI" : "Human";
-      return <Board option={option} />;
+      return (
+        <div className="row align-items-center">
+          <ScoreBoard player="cuteTaco" />
+          <Board option={option} />
+          <ScoreBoard player="cuteBurrito" />
+        </div>
+      );
     }
   }
 

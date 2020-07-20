@@ -2,6 +2,7 @@ import React from "react";
 import cuteTaco from "../media/cute_taco.png";
 import cuteBurrito from "../media/cute_burrito.png";
 import "./TopBanner.css";
+import "./sharedStyles.css";
 
 const TopBanner = () => {
   return (
