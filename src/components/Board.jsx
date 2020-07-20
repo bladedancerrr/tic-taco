@@ -155,8 +155,23 @@ class Board extends Component {
   gameShouldEnd = (squareId) => {
     const winner = getWinner(this.state.clickState, squareId);
     if (winner !== 0) {
-      this.setState({ winner: winner });
+      this.setState({ winner: winner }, () =>
+        // Update the scoreboard
+        this.updateScoreBoard()
+      );
     }
+  };
+
+  updateScoreBoard = () => {
+    console.log(this.state.turn);
+    // Don't care if there is no winner
+    var result = "-";
+
+    if (this.state.winner === 1) result = "tacoWin";
+
+    if (this.state.winner === 2) result = "burritoWin";
+    console.log(result);
+    this.props.onGameEnd(result);
   };
 }
 

@@ -12,7 +12,7 @@ const ScoreBoard = (props) => {
         alt=""
         className="BannerImage"
       />
-      <div className="Number">0</div>
+      <div className="Number">{props.winCount}</div>
     </div>
   );
 };
