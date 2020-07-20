@@ -18,6 +18,7 @@ class Board extends Component {
     turn: 0,
     /* Whether player is playing against AI or another human. */
     gameMode: this.props.option,
+    networkFailure: false,
   };
 
   /* Resetting grid to be empty. */
@@ -28,6 +29,7 @@ class Board extends Component {
       playerTurn: 1,
       winner: 0,
       turn: 0,
+      networkFailure: false,
     });
   };
 
@@ -79,6 +81,7 @@ class Board extends Component {
   };
 
   renderAIText = () => {
+    if (this.state.networkFailure) return "Baby burrito is offline :(";
     var text = "";
 
     if (this.state.gameMode === "AI") {
@@ -144,7 +147,7 @@ class Board extends Component {
         .post("http://localhost:5000/", { clickState: this.state.clickState })
         .then((Response) => this.handleClick(Response["data"]));
     } catch (e) {
-      console.error(e);
+      this.setState({ networkFailure: true });
     }
     return Response["data"];
   };
