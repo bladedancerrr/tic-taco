@@ -10,21 +10,28 @@ cors = CORS(app, resources={r"*": {"origins": "*"}})
 api = Api(app)
 
 
-class TicTacoAPI(Resource):
+class ticTacoAPI(Resource):
+    def __init__(self):
+        difficulty = None
+
     # get request
     def get(self):
         return "Tic Taco made with <3 by Aye & Pete"
 
     # post request
-    def post(self):
+    @app.route("/ai-move", methods=["POST"])
+    def get_move(self):
         rec_json = request.get_json()
         print(rec_json["clickState"])
         click_state = rec_json["clickState"]
         return generate_AI_move(click_state), 201, {'Access-Control-Allow-Origin': '*'}
 
+    # post request
+    @app.route("/difficulty", methods=["POST"])
+    def difficulty(self):
+        rec_json = request.get_json()
+        print(rec_json["difficulty"])
 
-    # set up api resource routing
-api.add_resource(TicTacoAPI, '/')
 
 if __name__ == "__main__":
     app.run()

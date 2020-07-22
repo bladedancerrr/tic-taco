@@ -19,12 +19,22 @@ const GameMode = (props) => {
       <div style={{ marginTop: 30 }}>
         <button
           className="GameModeButton"
-          onClick={() => renderGrid("AI", props.selectGameMode)}
-          id="AI"
+          onClick={() => renderGrid("AI-easy", props.selectGameMode)}
+          id="AI-easy"
         >
           <img src={cute_robot} className="GameModeImage" alt=""></img>
           <br></br>
           <div className="GameModeText"> Riley the Robot </div>
+        </button>
+
+        <button
+          className="GameModeButton"
+          onClick={() => renderGrid("AI-difficult", props.selectGameMode)}
+          id="AI-difficult"
+        >
+          <img src={cute_robot} className="GameModeImage" alt=""></img>
+          <br></br>
+          <div className="GameModeText"> Max the ToughBot here </div>
         </button>
 
         <button

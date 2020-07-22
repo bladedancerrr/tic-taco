@@ -144,7 +144,9 @@ class Board extends Component {
     await sleep(2000);
     try {
       await axios
-        .post("http://localhost:5000/", { clickState: this.state.clickState })
+        .post("http://localhost:5000/ai-move", {
+          clickState: this.state.clickState,
+        })
         .then((Response) => this.handleClick(Response["data"]));
     } catch (e) {
       this.setState({ networkFailure: true });

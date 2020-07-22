@@ -23,7 +23,13 @@ class App extends Component {
     if (gameMode === null)
       return <GameMode selectGameMode={this.selectGameMode} />;
     else {
-      const option = this.state.gameMode === "AI" ? "AI" : "Human";
+      console.log(this.state.gameMode);
+      const option =
+        this.state.gameMode === "AI-easy" ||
+        this.state.gameMode === "AI-difficult"
+          ? "AI"
+          : "Human";
+      console.log(option);
       return (
         <div className="row align-items-center">
           <ScoreBoard player="cuteTaco" winCount={this.state.tacoWin} />
