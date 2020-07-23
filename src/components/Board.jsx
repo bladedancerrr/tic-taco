@@ -19,6 +19,7 @@ class Board extends Component {
     /* Whether player is playing against AI or another human. */
     gameMode: this.props.option,
     networkFailure: false,
+    isDisabled: false,
   };
 
   /* Resetting grid to be empty. */
@@ -47,24 +48,7 @@ class Board extends Component {
         >
           {this.renderAIText()}
         </div>
-
-        <div>
-          <div>
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
-          </div>
-          <div>
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
-          </div>
-          <div>
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
-          </div>
-        </div>
+        {this.renderGrid()}
 
         <button className="ResetButton" onClick={this.onReset}>
           Start over!
@@ -74,13 +58,37 @@ class Board extends Component {
     );
   }
 
+  renderGrid = () => {
+    const isDisabled = this.state.isDisabled;
+    return (
+      <div>
+        <div>
+          {this.renderSquare(0, isDisabled)}
+          {this.renderSquare(1, isDisabled)}
+          {this.renderSquare(2, isDisabled)}
+        </div>
+        <div>
+          {this.renderSquare(3, isDisabled)}
+          {this.renderSquare(4, isDisabled)}
+          {this.renderSquare(5, isDisabled)}
+        </div>
+        <div>
+          {this.renderSquare(6, isDisabled)}
+          {this.renderSquare(7, isDisabled)}
+          {this.renderSquare(8, isDisabled)}
+        </div>
+      </div>
+    );
+  };
+
   /* Renders the square in grid. */
-  renderSquare = (squareId) => {
+  renderSquare = (squareId, isDisabled) => {
     return (
       <Square
         id={squareId}
         onClick={() => this.handleClick(squareId)}
         playerTurn={this.state.clickState[squareId]}
+        isDisabled={isDisabled}
       />
     );
   };
@@ -130,6 +138,7 @@ class Board extends Component {
         clickState: clickState,
         playerTurn: playerTurn === 1 ? 2 : 1,
         turn: nextTurn,
+        isDisabled: true,
       },
       /* Since setState is async, perform winCheck callback after state update */
       /* Once a burrito has been placed, check if there is a winner */
@@ -142,6 +151,7 @@ class Board extends Component {
 
     if (this.state.playerTurn === 2 && gameModeisAI && this.state.turn < 9) {
       await this.getAIMove();
+      this.setState({ isDisabled: false });
     }
   };
 
