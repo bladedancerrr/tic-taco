@@ -59,7 +59,8 @@ class Board extends Component {
   }
 
   renderGrid = () => {
-    const isDisabled = this.state.isDisabled;
+    const isDisabled =
+      this.state.gameMode === "AI" ? this.state.isDisabled : false;
     return (
       <div>
         <div>
