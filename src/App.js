@@ -4,6 +4,7 @@ import GameMode from "./components/GameMode";
 import TopBanner from "./components/TopBanner";
 import Board from "./components/Board";
 import ScoreBoard from "./components/ScoreBoard";
+import axios from "axios";
 
 class App extends Component {
   state = { gameMode: null, tacoWin: 0, burritoWin: 0 };
@@ -40,8 +41,18 @@ class App extends Component {
     }
   };
 
-  selectGameMode = (gameMode) => {
+  selectGameMode = async (gameMode) => {
     this.setState({ gameMode });
+    // Send this data to the backend
+    try {
+      await axios
+        .post("http://localhost:5000/difficulty", {
+          difficulty: gameMode,
+        })
+        .then((Response) => console.log(Response["data"]));
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   handleGameResult = (result) => {

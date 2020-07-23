@@ -10,27 +10,19 @@ cors = CORS(app, resources={r"*": {"origins": "*"}})
 api = Api(app)
 
 
-class ticTacoAPI(Resource):
-    def __init__(self):
-        difficulty = None
+@app.route("/ai-move", methods=["POST"])
+def get_move():
+    rec_json = request.get_json()
+    print(rec_json["clickState"])
+    click_state = rec_json["clickState"]
+    return generate_AI_move(click_state), 201, {'Access-Control-Allow-Origin': '*'}
 
-    # get request
-    def get(self):
-        return "Tic Taco made with <3 by Aye & Pete"
 
-    # post request
-    @app.route("/ai-move", methods=["POST"])
-    def get_move(self):
-        rec_json = request.get_json()
-        print(rec_json["clickState"])
-        click_state = rec_json["clickState"]
-        return generate_AI_move(click_state), 201, {'Access-Control-Allow-Origin': '*'}
-
-    # post request
-    @app.route("/difficulty", methods=["POST"])
-    def difficulty(self):
-        rec_json = request.get_json()
-        print(rec_json["difficulty"])
+@app.route("/difficulty", methods=["POST"])
+def set_difficulty():
+    rec_json = request.get_json()
+    print(rec_json["difficulty"])
+    return "success", 200
 
 
 if __name__ == "__main__":

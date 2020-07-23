@@ -38,7 +38,12 @@ class Board extends Component {
       /* Rendering 3x3 grid. */
       <div id="board_container" style={{ marginTop: 30 }}>
         <div
-          style={{ fontFamily: "Carter One", fontSize: 30, marginBottom: 30 }}
+          style={{
+            fontFamily: "Carter One",
+            fontSize: 30,
+            marginBottom: 30,
+            whiteSpace: "pre-wrap",
+          }}
         >
           {this.renderAIText()}
         </div>
@@ -81,7 +86,8 @@ class Board extends Component {
   };
 
   renderAIText = () => {
-    if (this.state.networkFailure) return "Baby burrito is offline :(";
+    if (this.state.networkFailure)
+      return "Baby burrito is offline :( \n Play against a human bean instead!";
     var text = "";
 
     if (this.state.gameMode === "AI") {
