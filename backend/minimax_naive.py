@@ -1,6 +1,6 @@
 import numpy as np
 from tree import Node, Tree
-from utils import is_game_over
+from utils import is_board_full
 
 # TODO: AI is assumed to go second here, subject to change
 AI = 2
@@ -19,7 +19,7 @@ def generate_AI_move(click_state):
 
 
 def minimax(node, depth, maximizingPlayer):
-    if not depth or is_game_over(node.board):
+    if not depth or is_board_full(node.board):
         return (node, evaluate(node, AI if maximizingPlayer else HUMAN))
 
     best_node = None
