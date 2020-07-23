@@ -24,13 +24,11 @@ class App extends Component {
     if (gameMode === null)
       return <GameMode selectGameMode={this.selectGameMode} />;
     else {
-      console.log(this.state.gameMode);
       const option =
         this.state.gameMode === "AI-easy" ||
         this.state.gameMode === "AI-difficult"
           ? "AI"
           : "Human";
-      console.log(option);
       return (
         <div className="row align-items-center">
           <ScoreBoard player="cuteTaco" winCount={this.state.tacoWin} />
@@ -45,11 +43,9 @@ class App extends Component {
     this.setState({ gameMode });
     // Send this data to the backend
     try {
-      await axios
-        .post("http://localhost:5000/difficulty", {
-          difficulty: gameMode,
-        })
-        .then((Response) => console.log(Response["data"]));
+      await axios.post("http://localhost:5000/difficulty", {
+        difficulty: gameMode,
+      });
     } catch (e) {
       console.log(e);
     }

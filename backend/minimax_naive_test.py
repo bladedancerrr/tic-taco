@@ -1,5 +1,5 @@
 import unittest
-from minimax import get_row, get_col, get_diag
+from minimax_naive import get_row, get_col, get_diag
 import numpy as np
 
 player1 = 1

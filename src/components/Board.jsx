@@ -153,7 +153,7 @@ class Board extends Component {
         .post("http://localhost:5000/ai-move", {
           clickState: this.state.clickState,
         })
-        .then((Response) => this.handleClick(Response["data"]));
+        .then((Response) => this.handleClick(parseInt(Response["data"])));
     } catch (e) {
       this.setState({ networkFailure: true });
     }
