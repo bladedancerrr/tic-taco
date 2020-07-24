@@ -1,14 +1,38 @@
 import numpy as np
 from tree import Node, Tree
-from utils import is_board_full, count_free_space, get_all_vectors
+from utils import is_board_full, count_free_space, get_all_vectors, get_outcome, is_game_over
 
 
 def generate_hard_AI_move(board_state):
-    pass
+    states = Tree(Node(board_state), full_tree=True)
+    best_node, _ = minimax(states.root, maximizing_player=True)
+    print(best_node)
+    print(best_node.move)
+    return best_node.move
 
 
-def minimax(node, depth, maximising_player):
-    pass
+def minimax(node, maximizing_player):
+    if is_game_over(node.board):
+        return (node, evaluate(node.board))
+
+    best_node = None
+    if maximizing_player:
+        max_eval = -float("inf")
+        for potential_node in node.children:
+            _, eval = minimax(potential_node, False)
+            if eval > max_eval:
+                max_eval = eval
+                best_node = potential_node
+        return best_node, max_eval
+
+    else:
+        min_eval = float("inf")
+        for potential_node in node.children:
+            _, eval = minimax(potential_node, True)
+            if eval < min_eval:
+                min_eval = eval
+                best_node = potential_node
+        return best_node, min_eval
 
 
 def evaluate(board_state):
@@ -23,36 +47,17 @@ def evaluate(board_state):
 
     n_free_space = count_free_space(board_state)
 
-    return (1 + n_free_space) * get_outcome(board_state)
-
-
-def get_outcome(board_state):
-    outcome = 0
-    # Check for a winner in the rows, cols and diags
-    vectors = get_all_vectors(board_state)
-    for v in vectors:
-        outcome = calculate_outcome(v)
-        if outcome != 0:
-            return outcome
+    outcome = get_outcome(board_state)
+    # Change outcome to -1 for the purpose of evaluation
+    if outcome == 2:
+        outcome = -1
 
     # This function should only be called when the game finished
     if not is_board_full(board_state) and outcome == 0:
         raise Exception(
             "evaluate called when the game have not been completed")
 
-    return outcome
-
-
-def calculate_outcome(vector):
-    """
-    draw -> outcome = 0
-    p1 win -> outcome = 1
-    p2 win -> outcome = -1
-    """
-    s = set(vector)
-    if len(s) != 1:
-        return 0
-    return 1 if 1 in s else -1
+    return (1 + n_free_space) * outcome
 
 
 if __name__ == "__main__":

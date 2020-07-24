@@ -52,7 +52,6 @@ class Tree(object):
         # If a full tree were to be generated, set the depth to 9 (which is the max depth for tic tac toe)
         if full_tree:
             max_depth = 9
-        print("the depth is", max_depth)
         self.root.generate_nodes(max_depth, ai_player)
 
 
