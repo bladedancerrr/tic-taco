@@ -3,8 +3,11 @@ from tree import Node, Tree
 from utils import is_board_full, count_free_space, get_all_vectors
 
 
-def minimax(self, board, player):
+def generate_hard_AI_move(board_state):
+    pass
 
+
+def minimax(node, depth, maximising_player):
     pass
 
 

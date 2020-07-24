@@ -7,7 +7,7 @@ AI = 2
 HUMAN = 1
 
 
-def generate_AI_move(click_state):
+def generate_easy_AI_move(click_state):
     # TODO: Depth is fixed to two atm, subject to change
     depth = 2
     states = Tree(Node(click_state))
@@ -94,6 +94,6 @@ if __name__ == "__main__":
     # node = Node(board)
     # node.move = 0
     # evaluate(node, 1)
-    generate_AI_move(board)
+    generate_easy_AI_move(board)
     # a = [0, 0, 0, 0, 0, 0, 0, 0, 0]
     # np.array(a).reshape(3, 3)

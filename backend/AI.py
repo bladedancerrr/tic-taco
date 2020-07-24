@@ -1,4 +1,5 @@
-from minimax_naive import generate_AI_move
+from minimax_naive import generate_easy_AI_move
+from minimax import generate_hard_AI_move
 
 
 class AI():
@@ -12,6 +13,6 @@ class AI():
     @staticmethod
     def generate_move(click_state):
         if AI.difficulty == "AI-easy":
-            return str(generate_AI_move(click_state))
+            return str(generate_easy_AI_move(click_state))
         else:
-            return "5"
+            return str(generate_hard_AI_move(click_state))

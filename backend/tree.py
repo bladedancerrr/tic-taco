@@ -38,21 +38,26 @@ class Node(object):
 
 
 class Tree(object):
-    def __init__(self, Node):
+    def __init__(self, Node, max_depth=2, full_tree=False):
         self.root = Node
-        self.__generate_tree()
+        self.__generate_tree(depth=max_depth, full_tree=full_tree)
 
-    def __generate_tree(self):
+    def __generate_tree(self, depth=2, full_tree=False):
         # TODO:
         # Fixing the depth to 2 for now, the actual value is subject to change
-        depth = 2 if self.root.get_blank_count() >= 2 else 1
+        max_depth = depth if self.root.get_blank_count() >= depth else 1
         # TODO: The AI player is assumed to go second at the moment, change later
         ai_player = 2
 
-        self.root.generate_nodes(depth, ai_player)
+        # If a full tree were to be generated, set the depth to 9 (which is the max depth for tic tac toe)
+        if full_tree:
+            max_depth = 9
+        print("the depth is", max_depth)
+        self.root.generate_nodes(max_depth, ai_player)
 
 
 if __name__ == "__main__":
-    n = Node([0, 1, 1, 2, 2, 0, 0, 0, 0])
-    t = Tree(n)
+    # n = Node([0, 1, 1, 2, 2, 0, 0, 0, 0])
+    n = Node([0, 1, 0, 0, 0, 0, 0, 0, 0])
+    t = Tree(n, full_tree=True)
     print()
