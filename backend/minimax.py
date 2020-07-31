@@ -5,19 +5,12 @@ from utils import is_board_full, count_free_space, get_all_vectors, get_outcome,
 
 def generate_hard_AI_move(board_state):
     states = Tree(Node(board_state), full_tree=True)
-    best_node, highest_value = minimax(states.root, maximizing_player=True)
-    print(best_node)
-    print(best_node.move)
+    best_node, _ = minimax(states.root, maximizing_player=True)
     return best_node.move
 
 
 def minimax(node, maximizing_player):
     if is_game_over(node.board):
-        e = evaluate(node.board)
-        print("the move is", node.move)
-        print("the board looks like\n", node.board)
-        print("the score is", e)
-        print("="*40)
         return (node, evaluate(node.board))
 
     best_node = None
@@ -47,15 +40,17 @@ def evaluate(board_state):
     score = (1 + #free_space_left) * outcome_of_game,
     where outcome_of_game = 1 if player2 wins, 
     outcome_of_game = 1 for draw and
-    outcome_of_game = 2 for loss
+    outcome_of_game = -1 for loss
     """
 
     n_free_space = count_free_space(board_state)
 
     outcome = get_outcome(board_state)
-    # Change outcome to -1 for the purpose of evaluation
-    if outcome == 2:
+    # Change outcome to -1 for the purpose of evaluation (If p1 wins, then it's a loss for the AI)
+    if outcome == 1:
         outcome = -1
+    elif outcome == 2:
+        outcome = 1
 
     # This function should only be called when the game finished
     if not is_board_full(board_state) and outcome == 0:
@@ -67,4 +62,5 @@ def evaluate(board_state):
 
 if __name__ == "__main__":
     board = [1, 2, 1, 1, 2, 0, 0, 0, 0]
+    # board = [1, 2, 1, 1, 2, 1, 2, 0, 0]
     generate_hard_AI_move(board)
