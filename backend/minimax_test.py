@@ -1,10 +1,16 @@
 import unittest
-import numpy as np
-from utils import is_board_full, count_free_space, get_all_vectors
-from minimax import evaluate
+from minimax import generate_hard_AI_move, evaluate
+from utils import is_game_over, is_board_full, count_free_space, get_all_vectors
 
 
-class TestEvaluate(unittest.TestCase):
+class Test_generate_hard_AI_move(unittest.TestCase):
+
+    def test_winning_move(self):
+        board = [1, 2, 1, 1, 2, 0, 0, 0, 0]
+        self.assertEqual(generate_hard_AI_move(board), 7)
+
+
+class Test_evaluate(unittest.TestCase):
 
     def test_draw(self):
         board = [1, 2, 1, 1, 2, 2, 2, 1, 1]

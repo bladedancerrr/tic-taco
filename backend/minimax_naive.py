@@ -11,7 +11,7 @@ def generate_easy_AI_move(click_state):
     # TODO: Depth is fixed to two atm, subject to change
     depth = 2
     states = Tree(Node(click_state))
-    print("start to think")
+
     (best_future_node, _) = minimax(
         states.root, depth, maximizingPlayer=True)
     print(best_future_node)

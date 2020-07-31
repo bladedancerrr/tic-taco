@@ -5,7 +5,7 @@ from utils import is_board_full, count_free_space, get_all_vectors, get_outcome,
 
 def generate_hard_AI_move(board_state):
     states = Tree(Node(board_state), full_tree=True)
-    best_node, _ = minimax(states.root, maximizing_player=True)
+    best_node, highest_value = minimax(states.root, maximizing_player=True)
     print(best_node)
     print(best_node.move)
     return best_node.move
@@ -13,6 +13,11 @@ def generate_hard_AI_move(board_state):
 
 def minimax(node, maximizing_player):
     if is_game_over(node.board):
+        e = evaluate(node.board)
+        print("the move is", node.move)
+        print("the board looks like\n", node.board)
+        print("the score is", e)
+        print("="*40)
         return (node, evaluate(node.board))
 
     best_node = None
@@ -61,4 +66,5 @@ def evaluate(board_state):
 
 
 if __name__ == "__main__":
-    print(evaluate([1, 2, 1, 1, 2, 2, 2, 1, 1]))
+    board = [1, 2, 1, 1, 2, 0, 0, 0, 0]
+    generate_hard_AI_move(board)
