@@ -1,10 +1,13 @@
 import React from "react";
 import AnimeWOW from "../media/anime-wow-sound-effect.mp3";
-import cute_astronaut from "../media/cute_astronaut.png";
+import cute_brain from "../media/cute_brain.png";
 import cute_robot from "../media/cute_robot.png";
+import tough_robot from "../media/tough_robot.png";
 import "./GameMode.css";
 // Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 // Icons made by <a href="https://www.flaticon.com/authors/photo3idea-studio" title="photo3idea_studio">photo3idea_studio</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+// Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+// <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 const opponentChoiceStyle = {
   fontFamily: "Faster One",
@@ -24,7 +27,7 @@ const GameMode = (props) => {
         >
           <img src={cute_robot} className="GameModeImage" alt=""></img>
           <br></br>
-          <div className="GameModeText"> Riley the Robot </div>
+          <div className="GameModeText"> Mini the CuteBot </div>
         </button>
 
         <button
@@ -32,9 +35,9 @@ const GameMode = (props) => {
           onClick={() => renderGrid("AI-difficult", props.selectGameMode)}
           id="AI-difficult"
         >
-          <img src={cute_robot} className="GameModeImage" alt=""></img>
+          <img src={tough_robot} className="GameModeImage" alt=""></img>
           <br></br>
-          <div className="GameModeText"> Max the ToughBot here </div>
+          <div className="GameModeText"> Max the ToughBot</div>
         </button>
 
         <button
@@ -42,7 +45,7 @@ const GameMode = (props) => {
           onClick={() => renderGrid("Human", props.selectGameMode)}
           id="Human"
         >
-          <img src={cute_astronaut} className="GameModeImage" alt=""></img>
+          <img src={cute_brain} className="GameModeImage" alt=""></img>
           <br></br>
           <div className="GameModeText">Another Human Bean </div>
         </button>
