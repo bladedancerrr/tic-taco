@@ -31,6 +31,7 @@ class Board extends Component {
       winner: 0,
       turn: 0,
       networkFailure: false,
+      isDisabled: false
     });
   };
 
