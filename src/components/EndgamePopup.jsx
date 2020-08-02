@@ -1,8 +1,8 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
 import cuteTaco from "../media/cute_taco.png";
 import cuteBurrito from "../media/cute_burrito.png";
+import "./EndgamePopup.css";
 
 function EndgamePopup(props) {
   const { won, draw, winner, onHide } = props;
@@ -19,17 +19,27 @@ function EndgamePopup(props) {
           style={{ textAlign: "center" }}
           id="contained-modal-title-vcenter"
         >
-          <h4 style={{ textAlign: "center" }}>Game over! </h4>
+          <h4
+            style={{
+              fontSize: 30,
+              fontFamily: "Carter One",
+              textAlign: "center",
+            }}
+          >
+            Game over!{" "}
+          </h4>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4 style={{ textAlign: "center" }}>
+        <h4 style={{ fontFamily: "Carter One", textAlign: "center" }}>
           {renderMessage(won, draw, winner)}
         </h4>
         <div style={{ textAlign: "center" }}> {renderImage(winner, draw)}</div>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={onHide}>Play again :3</Button>
+        <button className="PlayAgainButton" onClick={onHide}>
+          Play again :3
+        </button>
       </Modal.Footer>
     </Modal>
   );
@@ -53,9 +63,9 @@ function renderImage(winner, draw) {
     imgSrc = winner === 1 ? cuteTaco : cuteBurrito;
     return (
       <img
+        className="MexicanSnack"
         src={imgSrc}
         alt="This a cute Mexican snack :3"
-        style={{ width: 200, height: 140, marginBottom: 20, marginTop: 40 }}
       ></img>
     );
   } else {
